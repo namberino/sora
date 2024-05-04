@@ -18,7 +18,7 @@ init_pm: ; initialize segment registers and the stack
     mov fs, ax
     mov gs, ax
 
-    mov ebp, 0x90000 ; update the stack so it is right at the top of the free space 
+    mov ebp, 0x90000 ; update the stack so it is right at the top of the free space
     mov esp, ebp
 
     call BEGIN_PM ; call a well-known label with useful code
