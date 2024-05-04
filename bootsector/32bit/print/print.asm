@@ -5,7 +5,7 @@
 ; Accessing specific character on an 80x25 grid (because every characters use 2 bytes, 1 for ascii, 1 for color): 0xb8000 + 2 * (row * 80 + col)
 ; Cannot yet call the subroutine from the bootloader because we don't have GDT and enter protected mode
 ; https://www.eecg.utoronto.ca/~amza/www.mindsec.com/files/x86regs.html
-[bit 32] ; using 32-bit protected mode
+[bits 32] ; using 32-bit protected mode
 
 ; constants
 VIDEO_MEMORY equ 0xb8000

@@ -17,6 +17,7 @@ mov [es:0xfe56], ax
 # Segment descriptor
 
 - The way segmenting memory and using offsets to reach into those segments is implemented differently in 32-bit protected mode (primarily to afford more flexibility).
+- This makes the current interrupt vector table (IVT) that the BIOS setup at the start of memory completely useless
 - In this mode, the process of translating logical addresses (segment register + offset) to physical address is different: Rather than multiply the value of a segment register by 16 then add it to the offset, segment register becomes the index to a particular *segment descriptor* (SD) in the GDT
 - Segment descriptor is an 8-byte structure that defines the following properties of a protected-mode segment:
   - Base address (32 bits), which defines where the segment begins in physical memory
