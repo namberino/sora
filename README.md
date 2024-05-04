@@ -8,7 +8,7 @@ Just some mini-projects on operating system for me to learn OS development
 - [x] Accessing the disk
 - [x] Program the GDT
 - [x] Switch to 32-bit protected mode
-- [ ] Simple kernel
+- [x] Simple kernel
 - [ ] Video driver
 - [ ] Interrupt Descriptor Table
 - [ ] Parse user input
