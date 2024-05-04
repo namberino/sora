@@ -1,3 +1,3 @@
 # Some OS dev stuff
 
-Just some OS dev mini-projects for me to learn OS development
+Just some mini-projects on operating system for me to learn OS development
