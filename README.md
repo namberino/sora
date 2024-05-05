@@ -30,7 +30,7 @@ Before you can compile this, you need to install some tools and libraries first:
 - [x] Program the GDT
 - [x] Switch to 32-bit protected mode
 - [x] Simple kernel
-- [ ] Video driver
+- [x] Video driver
 - [ ] Interrupt Descriptor Table
 - [ ] Parse user input
 - [ ] Memory allocator
