@@ -1,6 +1,27 @@
-# Some OS dev stuff
+# Sora: A mini operating system
 
-Just some mini-projects on operating system for me to learn OS development
+Sora is a small operating system with a small bootloader and kernel
+
+This is a learning project for me so the code is somewhat messy. I've documented everything quite throughly through so if you want to, you can go through the code and learn more about operating system development
+
+# Requirements
+
+Before you can compile this, you need to install some tools and libraries first:
+
+- [NASM](https://www.nasm.org/)
+- [QEMU](https://www.qemu.org/)
+- [i386-elf-toolchain](https://github.com/nativeos/i386-elf-toolchain/releases)
+- [binutils](https://www.gnu.org/software/binutils/)
+- [gmp](https://gmplib.org/)
+- [mpfr](https://www.mpfr.org/)
+
+# **make** commands
+
+| Commands | Description |
+| --- | --- |
+| `make run` | Compile and run|
+| `make debug` | Run and debug in GDB |
+| `make clean` | Remove object and binary files |
 
 # Milestones
 
