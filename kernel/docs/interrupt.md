@@ -53,4 +53,5 @@
 # Reference
 
 [IDT](https://web.archive.org/web/20160326064709/http://jamesmolloy.co.uk/tutorial_html/4.-The%20GDT%20and%20IDT.html)
-[OSdev wiki](https://wiki.osdev.org/Interrupt_Descriptor_Table)
+[OSdev wiki - IDT](https://wiki.osdev.org/Interrupt_Descriptor_Table)
+[OSdev wiki - ISR](https://wiki.osdev.org/Interrupt_Service_Routine)
