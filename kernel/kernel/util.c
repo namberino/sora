@@ -47,4 +47,6 @@ void int_to_ascii(int n, char str[])
         str[i++] = '-';
 
     str[i] = '\0';
+
+    reverse(str);
 }
