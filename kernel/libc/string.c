@@ -54,10 +54,10 @@ void backspace(char str[])
 }
 
 // append 1 character to string
-void append(char str[], char n)
+void append(char str[], char c)
 {
     int len = strlen(str);
-    str[len] = n;
+    str[len] = c;
     str[len + 1] = '\0';
 }
 
@@ -71,4 +71,12 @@ int strcmp(char str1[], char str2[])
             return 0;
 
     return str1[i] - str2[i];
+}
+
+char char_upper(char c)
+{
+    if (c > 96 && c < 123) // if is valid lowercase character
+        c ^= 0x20; // toggles 5th bit in ascii value
+
+    return c;
 }

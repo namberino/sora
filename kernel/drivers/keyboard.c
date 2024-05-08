@@ -9,7 +9,14 @@
 // scancode (reference https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
 #define BACKSPACE 0x0E
 #define ENTER 0x1C
+#define LSHIFT_DOWN 0x2A
+#define LSHIFT_UP 0xAA
+#define RSHIFT_DOWN 0x36
+#define RSHIFT_UP 0xB6
+#define CAPSLOCK_DOWN 0x3A
+#define CAPSLOCK_UP 0xBA
 #define SCANCODE_MAX 57
+int cap = 0;
 
 static char key_buffer[256]; // buffer
 
@@ -24,9 +31,9 @@ const char* scancode_name[] = {
 
 const char scancode_ascii[] = { 
     '?', '?', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', 
-    '=', '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 
-    '[', ']', '?', '?', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 
-    ';', '\'', '`', '?', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 
+    '=', '?', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 
+    '[', ']', '?', '?', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 
+    ';', '\'', '`', '?', '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 
     ',', '.', '/', '?', '?', '?', ' '
 };
 
@@ -34,6 +41,9 @@ static void keyboard_callback(registers_t regs)
 {
     // PIC leaves the scancodes in port 0x60
     u8 scancode = port_byte_in(0x60);
+
+    if (scancode == LSHIFT_UP || scancode == RSHIFT_UP || scancode == CAPSLOCK_UP)
+        cap = 0;
 
     if (scancode > SCANCODE_MAX)
         return;
@@ -52,9 +62,18 @@ static void keyboard_callback(registers_t regs)
         user_input(key_buffer); // kernel-controlled function 
         key_buffer[0] = '\0'; // clear key buffer
     }
+    else if (scancode == LSHIFT_DOWN || scancode == RSHIFT_DOWN || scancode == CAPSLOCK_DOWN)
+    {
+        if (cap == 0)
+            cap = 1;
+    }
     else
     {
         char letter = scancode_ascii[(int)scancode];
+
+        if (cap == 1)
+            letter = char_upper(letter);
+
         append(key_buffer, letter); // append to key buffer
 
         char str[2] = {letter, '\0'};
