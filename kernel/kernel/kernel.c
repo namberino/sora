@@ -8,7 +8,8 @@ void main()
     isr_install();
     irq_install();
 
-    kprint("Keyboard input is enabled\nType END to halt the processor\n> ");
+    clear_screen();
+    kprint("Hello World! I am Sora\n\nKeyboard input is enabled\nType END to halt the processor\n> ");
 
     // testing some of the interrupts
     // __asm__ __volatile__("int $2");
