@@ -33,5 +33,5 @@ Before you can compile this, you need to install some tools and libraries first:
 - [x] Simple kernel
 - [x] Video driver
 - [x] Interrupt Descriptor Table
-- [ ] Parse user input
+- [x] Parse user input
 - [ ] Memory allocator
