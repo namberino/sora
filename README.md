@@ -15,7 +15,7 @@ Before you can compile this, you need to install some tools and libraries first:
 - [gmp](https://gmplib.org/)
 - [mpfr](https://www.mpfr.org/)
 
-# **make** commands
+# Useful commands
 
 | Commands | Description |
 | --- | --- |
