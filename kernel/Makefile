@@ -40,4 +40,4 @@ debug: kernel-image.bin kernel.elf
 
 clean:
 	rm -rf *.bin *.dis *.o *.elf kernel-image.bin 
-	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o libc/.o
+	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o libc/*.o
