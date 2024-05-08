@@ -6,6 +6,29 @@ void mem_copy(char* source, char* destination, int nbytes)
     }
 }
 
+int strlen(char str[])
+{
+    int i = 0;
+
+    while (str[i] != '\0')
+        ++i;
+
+    return i;
+}
+
+// for printing numbers in correct order
+void reverse(char str[])
+{
+    int c, i, j;
+
+    for (i = 0, j = strlen(str) - 1; i < j; i++, j--)
+    {
+        c = str[i];
+        str[i] = str[j];
+        str[j] = c;
+    }
+}
+
 // k&r implementation
 void int_to_ascii(int n, char str[])
 {
