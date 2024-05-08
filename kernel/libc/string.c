@@ -1,5 +1,6 @@
 #include "string.h"
 
+// get the length of the string
 int strlen(char str[])
 {
     int i = 0;
@@ -10,7 +11,7 @@ int strlen(char str[])
     return i;
 }
 
-// for printing numbers in correct order
+// reverse the string order (for printing numbers in correct order)
 void reverse(char str[])
 {
     int c, i, j;
@@ -45,12 +46,14 @@ void int_to_ascii(int n, char str[])
     reverse(str);
 }
 
+// handling backspace
 void backspace(char str[])
 {
     int len = strlen(str);
     str[len - 1] = '\0';
 }
 
+// append 1 character to string
 void append(char str[], char n)
 {
     int len = strlen(str);
@@ -58,7 +61,7 @@ void append(char str[], char n)
     str[len + 1] = '\0';
 }
 
-//rReturns < 0 if str1 < str2, 0 if str1 == str2, > 0 if str1 > str2
+// returns < 0 if str1 < str2, 0 if str1 == str2, > 0 if str1 > str2
 int strcmp(char str1[], char str2[])
 {
     int i;

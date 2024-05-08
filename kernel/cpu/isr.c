@@ -113,7 +113,7 @@ char* exception_msg[] = {
     "Reserved"
 };
 
-// right now we print the interrupt code and interrupt message
+// we print the interrupt code and interrupt message
 void isr_handler(registers_t reg)
 {
     kprint("Interrupt: ");
@@ -125,6 +125,7 @@ void isr_handler(registers_t reg)
     kprint("\n");
 }
 
+// register the interrupt handler
 void register_int_handler(u8 n, isr_t handler)
 {
     int_handlers[n] = handler;
@@ -147,9 +148,10 @@ void irq_handler(registers_t reg)
     }
 }
 
+// install the timer and keyboard irq
 void irq_install()
 {
     asm volatile("sti"); // enable interrupts
-    init_timer(50); // initialize IRQ0: timer
+    init_timer(50); // initialize IRQ0: timer (50Hz)
     init_keyboard(); // initialize IRQ1: keyboard
 }

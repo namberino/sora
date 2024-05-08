@@ -50,7 +50,7 @@ static void keyboard_callback(registers_t regs)
     {
         kprint("\n");
         user_input(key_buffer); // kernel-controlled function 
-        key_buffer[0] = '\0';
+        key_buffer[0] = '\0'; // clear key buffer
     }
     else
     {

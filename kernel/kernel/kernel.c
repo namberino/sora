@@ -15,6 +15,7 @@ void main()
     // __asm__ __volatile__("int $3");
 }
 
+// handling user input
 void user_input(char* input)
 {
     if (strcmp(input, "END") == 0)
