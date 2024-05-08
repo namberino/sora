@@ -1,6 +1,7 @@
-C_SRC = $(wildcard kernel/*.c drivers/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h)
-OBJ = ${C_SRC:.c=.o} # file extension replacement
+C_SRC = $(wildcard kernel/*.c drivers/*.c cpu/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
+ASM_SRC = $(wildcard cpu/*.asm)
+OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
 CC = /opt/local/bin/i386-elf-gcc
 GDB = /usr/local/bin/i386-elf-gdb
@@ -24,7 +25,7 @@ run: kernel-image.bin
 # open connection to qemu on port 1234
 # load kernel object with symbols
 debug: kernel-image.bin kernel.elf
-	qemu-system-i386 -s -fda kernel-image.bin &
+	qemu-system-i386 -s -fda kernel-image.bin -d guest_errors, int &
 	${GDB} -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
 
 # rules for wildcards
@@ -38,5 +39,5 @@ debug: kernel-image.bin kernel.elf
 	nasm -f bin $< -o $@
 
 clean:
-	rm -rf *.bin *.dis *.o kernel-image.bin *.elf
-	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o
+	rm -rf *.bin *.dis *.o *.elf kernel-image.bin 
+	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o
