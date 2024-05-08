@@ -1,9 +1,80 @@
 #include "keyboard.h"
-#include "ports.h"
+#include "../cpu/ports.h"
 #include "../cpu/isr.h"
 #include "screen.h"
+#include "../libc/string.h"
+#include "../libc/function.h"
+#include "../kernel/kernel.h"
 
-// convert scancode to ascii letter (reference https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
+// scancode (reference https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
+#define BACKSPACE 0x0E
+#define ENTER 0x1C
+#define SCANCODE_MAX 57
+
+static char key_buffer[256]; // buffer
+
+const char* scancode_name[] = { 
+    "ERROR", "ESC", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", 
+    "-", "=", "BACKSPACE", "TAB", "Q", "W", "E", "R", "T", "Y", "U", 
+    "I", "O", "P", "[", "]", "ENTER", "LCTRL", "A", "S", "D", "F", 
+    "G", "H", "J", "K", "L", ";", "'", "`", "LSHIFT", "\\", "Z", 
+    "X", "C", "V", "B", "N", "M", ",", ".", "/", "RSHIFT", "KEYPAD *", 
+    "LALT", "SPACE"
+};
+
+const char scancode_ascii[] = { 
+    '?', '?', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', 
+    '=', '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 
+    '[', ']', '?', '?', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 
+    ';', '\'', '`', '?', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 
+    ',', '.', '/', '?', '?', '?', ' '
+};
+
+static void keyboard_callback(registers_t regs)
+{
+    // PIC leaves the scancodes in port 0x60
+    u8 scancode = port_byte_in(0x60);
+
+    if (scancode > SCANCODE_MAX)
+        return;
+
+    if (scancode == BACKSPACE)
+    {
+        if (key_buffer[0] != '\0')
+        {
+            backspace(key_buffer);
+            kprint_backspace();
+        }
+    }
+    else if (scancode == ENTER)
+    {
+        kprint("\n");
+        user_input(key_buffer); // kernel-controlled function 
+        key_buffer[0] = '\0';
+    }
+    else
+    {
+        char letter = scancode_ascii[(int)scancode];
+        append(key_buffer, letter); // append to key buffer
+
+        char str[2] = {letter, '\0'};
+        kprint(str); // print the letter to screen
+    }
+    UNUSED(regs);
+    // int_to_ascii(scancode, scancode_ascii);
+    // kprint("Keyboard scancode: ");
+    // kprint(scancode_ascii);
+    // kprint(", ");
+    // print_letter(scancode);
+    // kprint("\n");
+}
+
+void init_keyboard()
+{
+    register_int_handler(IRQ1, keyboard_callback);
+}
+
+/*
 void print_letter(u8 scancode)
 {
     switch (scancode)
@@ -254,22 +325,4 @@ void print_letter(u8 scancode)
             break;
     }
 }
-
-static void keyboard_callback(registers_t regs)
-{
-    // PIC leaves the scancodes in port 0x60
-    u8 scancode = port_byte_in(0x60);
-    char* scancode_ascii;
-
-    int_to_ascii(scancode, scancode_ascii);
-    kprint("Keyboard scancode: ");
-    kprint(scancode_ascii);
-    kprint(", ");
-    print_letter(scancode);
-    kprint("\n");
-}
-
-void init_keyboard()
-{
-    register_int_handler(IRQ1, keyboard_callback);
-}
+*/

@@ -1,11 +1,11 @@
-C_SRC = $(wildcard kernel/*.c drivers/*.c cpu/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
+C_SRC = $(wildcard kernel/*.c drivers/*.c cpu/*.c libc/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h libc/*.h)
 ASM_SRC = $(wildcard cpu/*.asm)
 OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
 CC = /opt/local/bin/i386-elf-gcc
 GDB = /usr/local/bin/i386-elf-gdb
-CFLAGS = -g
+CFLAGS = -g -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
 
 # run by default
 kernel-image.bin: boot/bootsector.bin kernel.bin

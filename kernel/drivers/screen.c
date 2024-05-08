@@ -1,6 +1,6 @@
-#include "ports.h"
 #include "screen.h"
-#include "../kernel/util.h"
+#include "../cpu/ports.h"
+#include "../libc/mem.h"
 
 // this uses vga ports to get current cursor position offset
 // get high byte (byte 14) and low byte (byte 15)
@@ -49,7 +49,7 @@ int get_offset_col(int offset)
 
 int print_char(char c, int col, int row, char attr)
 {
-    unsigned char* video_mem = (unsigned char*)VIDEO_ADDRESS;
+    u8* video_mem = (u8*)VIDEO_ADDRESS;
     if (!attr) // assign default color attribute
         attr = WHITE_ON_BLACK;
 
@@ -73,6 +73,11 @@ int print_char(char c, int col, int row, char attr)
         row = get_offset_row(offset);
         offset = get_offset(0, row + 1);
     }
+    else if (c == 0x08) // backspace handling (not advance offset when printing backspace)
+    {
+        video_mem[offset] = ' ';
+        video_mem[offset + 1] = attr;
+    }
     else
     {
         video_mem[offset] = c;
@@ -84,11 +89,11 @@ int print_char(char c, int col, int row, char attr)
     // copy the rows upwards and clear the text on the last line
     if (offset >= MAX_ROWS * MAX_COLS * 2)
     {
-        for (int i = 0; i < MAX_ROWS; i++)
-            mem_copy(get_offset(0, i) + VIDEO_ADDRESS, get_offset(0, i - 1) + VIDEO_ADDRESS, MAX_COLS * 2); // copy video memory of each rows
+        for (int i = 1; i < MAX_ROWS; i++)
+            mem_copy((u8*)(get_offset(0, i) + VIDEO_ADDRESS), (u8*)(get_offset(0, i - 1) + VIDEO_ADDRESS), MAX_COLS * 2); // copy video memory of each rows
 
         // clear text on the last line
-        char* last_line = get_offset(0, MAX_ROWS - 1) + VIDEO_ADDRESS;
+        char* last_line = (char*)(get_offset(0, MAX_ROWS - 1) + (u8*)VIDEO_ADDRESS);
         for (int i = 0; i < MAX_COLS * 2; i++) 
             last_line[i] = 0;
         
@@ -129,15 +134,23 @@ void kprint(char* message)
     kprint_at(message, -1, -1);
 }
 
+void kprint_backspace()
+{
+    int offset = get_cursor_offset() - 2;
+    int row = get_offset_row(offset);
+    int col = get_offset_col(offset);
+    print_char(0x08, col, row, WHITE_ON_BLACK);
+}
+
 void clear_screen()
 {
     int screen_size = MAX_COLS * MAX_ROWS;
-    char* screen = VIDEO_ADDRESS;
+    u8* screen = (u8*)VIDEO_ADDRESS;
 
     // modifying every 2 bytes
     for (int i = 0; i < screen_size; i++)
     {
-        screen[i * 2] = " ";
+        screen[i * 2] = ' ';
         screen[i * 2 + 1] = WHITE_ON_BLACK;
     }
 

@@ -1,18 +1,29 @@
-#include "../drivers/screen.h"
-#include "util.h"
 #include "../cpu/isr.h"
-#include "../cpu/timer.h"
-#include "../drivers/keyboard.h"
+#include "../drivers/screen.h"
+#include "kernel.h"
+#include "../libc/string.h"
 
 void main()
 {
     isr_install();
-    asm volatile("sti"); // set interrupt flag (call interrupt)
-    //init_timer(50);
+    irq_install();
 
-    init_keyboard();
+    kprint("Keyboard input is enabled\nType END to halt the CPU\n>");
 
     // testing some of the interrupts
     // __asm__ __volatile__("int $2");
     // __asm__ __volatile__("int $3");
+}
+
+void user_input(char* input)
+{
+    if (strcmp(input, "END") == 0)
+    {
+        kprint("Stopping the CPU\n");
+        asm volatile("hlt");
+    }
+    
+    kprint("Input is: ");
+    kprint(input);
+    kprint("\n>");
 }

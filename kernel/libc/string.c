@@ -1,10 +1,4 @@
-void mem_copy(char* source, char* destination, int nbytes)
-{
-    for (int i = 0; i < nbytes; i++)
-    {
-        *(destination + i) = *(source + i);
-    }
-}
+#include "string.h"
 
 int strlen(char str[])
 {
@@ -49,4 +43,29 @@ void int_to_ascii(int n, char str[])
     str[i] = '\0';
 
     reverse(str);
+}
+
+void backspace(char str[])
+{
+    int len = strlen(str);
+    str[len - 1] = '\0';
+}
+
+void append(char str[], char n)
+{
+    int len = strlen(str);
+    str[len] = n;
+    str[len + 1] = '\0';
+}
+
+//rReturns < 0 if str1 < str2, 0 if str1 == str2, > 0 if str1 > str2
+int strcmp(char str1[], char str2[])
+{
+    int i;
+
+    for (i = 0; str1[i] == str2[i]; i++)
+        if (str1[i] == '\0')
+            return 0;
+
+    return str1[i] - str2[i];
 }
