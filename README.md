@@ -19,6 +19,7 @@ Before you can compile this, you need to install some tools and libraries first:
 
 | Commands | Description |
 | --- | --- |
+| `make` | Compile |
 | `make run` | Compile and run|
 | `make debug` | Run and debug in GDB |
 | `make clean` | Remove object and binary files |
