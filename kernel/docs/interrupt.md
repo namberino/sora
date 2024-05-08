@@ -50,8 +50,32 @@
 
 - Some ISR push an error code onto the stack, others don't so we need to push dummy error code for those that don't so that the stack can be consistent
 
+# Interrupt Request (IRQ)
+
+- All devices that are interrupt-capable have a line connecting them to the **PIC** (Programmable Interrupt Controller)
+- The PIC is the only device that is directly connected to the CPU's interrupt pin
+- PIC is used as a multiplexer and it prioritises between interrupting devices
+- All modern PC have 2 PICs (master and slave), serving 15 interrupt devices (one line is used to signal the slave PIC)
+
+- Remapping the PIC: Change the interrupt number it delivers for each IRQ line
+- Default mapping: 
+  - IRQ 0..7 - INT 0x8..0xF
+  - IRQ 8..15 - INT 0x70..0x77
+
+- The master IRQ mappings conflict with the interrupt numbers used by our processor to signal exceptions and fault, so we need to remap the PICs so that the IRQs 0..15 correspond to ISRs 32..47 (31 is the last CPU-used ISR)
+
+- PIC communicate via I/O ports
+- The master PIC: command = 0x20 and data = 0x21
+- The slave PIC: command = 0xA0 and data = 0xA1
+
+- To remap the PIC, you have to do a full reinitialisation of them (code for this is pretty weird and obfuscated)
+
 # Reference
+
+> *Polling* is a method where a device continuously checks the status of another device to determine if it needs attention
 
 [IDT](https://web.archive.org/web/20160326064709/http://jamesmolloy.co.uk/tutorial_html/4.-The%20GDT%20and%20IDT.html)
 [OSdev wiki - IDT](https://wiki.osdev.org/Interrupt_Descriptor_Table)
 [OSdev wiki - ISR](https://wiki.osdev.org/Interrupt_Service_Routine)
+[OSdev wiki - PIC](https://wiki.osdev.org/PIC)
+
