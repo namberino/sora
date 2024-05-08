@@ -1,13 +1,3 @@
-void mem_set(u8* destination, u8 val, u32 len)
-{
-    u8* temp = (u8*) destination;
-    while (len != 0)
-    {
-        *temp++ = val;
-        len--;
-    }
-}
-
 void mem_copy(char* source, char* destination, int nbytes)
 {
     for (int i = 0; i < nbytes; i++)
