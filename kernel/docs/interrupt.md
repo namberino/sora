@@ -91,6 +91,11 @@ divisor = 1193180 Hz / frequency (in Hz)
 
 - PIT has 4 registers in I/O space - 0x40-0x42 are the data ports for channels 0-2 respectively, and 0x43 is the command port
 
+# Keyboard interrupt
+
+- We can use PIC for keyboard interrupting, but PIC doesn't send an ASCII code for key pressed. It sends the scancode for the key-down and key-up events
+- We need to translate those scancodes to get ASCII code
+
 # Reference
 
 > *Polling* is a method where a device continuously checks the status of another device to determine if it needs attention
@@ -99,4 +104,4 @@ divisor = 1193180 Hz / frequency (in Hz)
 [OSdev wiki - IDT](https://wiki.osdev.org/Interrupt_Descriptor_Table)
 [OSdev wiki - ISR](https://wiki.osdev.org/Interrupt_Service_Routine)
 [OSdev wiki - PIC](https://wiki.osdev.org/PIC)
-
+[Keyboard scancodes](https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
