@@ -70,6 +70,27 @@
 
 - To remap the PIC, you have to do a full reinitialisation of them (code for this is pretty weird and obfuscated)
 
+# Programmable Interval Timer (PIT)
+
+- A chip connected to IRQ0
+- Can interrupt processor at a user-defined rate (between 18.2Hz and 1.1931 MHz) 
+- The PIT is the primary method used for implementing a system clock and the only method available for implementing multitasking (switch processes on interrupt)
+
+- The PIT has an internal clock which oscillates at approximately 1.1931MHz
+- This clock signal is fed through a frequency divider, to modulate the final output frequency
+- The PIT has 3 channels (each with its own freq divider):
+    - Channel 0 is the most useful. It's output is connected to IRQ0
+    - Channel 1 is very un-useful and on modern hardware is no longer implemented. It used to control refresh rates for DRAM
+    - Channel 2 controls the PC speaker
+- We'll use channel 0
+
+- Set the PIT so it interrupts us at regular intervals at frequency *f*
+```
+divisor = 1193180 Hz / frequency (in Hz)
+```
+
+- PIT has 4 registers in I/O space - 0x40-0x42 are the data ports for channels 0-2 respectively, and 0x43 is the command port
+
 # Reference
 
 > *Polling* is a method where a device continuously checks the status of another device to determine if it needs attention
