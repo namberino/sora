@@ -1,8 +1,10 @@
 # Sora: A mini operating system
 
-Sora is a small operating system with a small bootloader and a small kernel
+Sora is a small operating system with a small bootloader and a small kernel.
 
-This is a learning project for me so the code is somewhat messy. I've documented everything quite throughly through so if you want to, you can go through the code and learn more about operating system development
+This project was started in January 2024. I took an operating system class a few semesters ago but it was a lot of theory. After that class, I didn't feel like I truely understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development. That's why I started this project.
+
+This is a big learning project for me so the code is somewhat messy. I've documented everything quite throughly through so if you want to, you can go through the code and learn more about operating system development.
 
 ![qemu emulation](img/os-emulate-qemu.png)
 
@@ -19,7 +21,7 @@ Before you can compile this, you need to install some tools and libraries first:
 
 # Project structure
 
-- The [bootsector](bootsector) directory is some mini bootsector projects that I made to get used to programming the bootsector
+- The [bootsector](bootsector) directory is some mini bootsector projects that I made to get used to programming the bootsector.
 - The [kernel](kernel) directory is where you'll find the source code for Sora. Compile and run the kernel there.
 
 # Useful commands
