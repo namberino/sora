@@ -5,6 +5,7 @@
 #include "../libc/string.h"
 #include "../libc/function.h"
 #include "../kernel/kernel.h"
+#include <stdint.h>
 
 // scancode (reference https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
 #define BACKSPACE 0x0E
@@ -40,7 +41,7 @@ const char scancode_ascii[] = {
 static void keyboard_callback(registers_t regs)
 {
     // PIC leaves the scancodes in port 0x60
-    u8 scancode = port_byte_in(0x60);
+    uint8_t scancode = port_byte_in(0x60);
 
     if (scancode == LSHIFT_UP || scancode == RSHIFT_UP || scancode == CAPSLOCK_UP)
         cap = 0;

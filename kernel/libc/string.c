@@ -1,5 +1,5 @@
 #include "string.h"
-#include "../cpu/types.h"
+#include <stdint.h>
 
 // get the length of the string
 int strlen(char str[])
@@ -88,7 +88,7 @@ void hex_to_ascii(int n, char str[])
     append(str, 'x');
     char zeros = 0;
 
-    s32 temp;
+    int32_t temp;
     for (int i = 28; i > 0; i -= 4)
     {
         temp = (n >> i) & 0xF;

@@ -1,6 +1,7 @@
 #include "screen.h"
 #include "../cpu/ports.h"
 #include "../libc/mem.h"
+#include <stdint.h>
 
 // this uses vga ports to get current cursor position offset
 // get high byte (byte 14) and low byte (byte 15)
@@ -20,9 +21,9 @@ void set_cursor_offset(int offset)
     offset /= 2;
 
     port_byte_out(REG_SCREEN_CTRL, 14); // open port to send
-    port_byte_out(REG_SCREEN_DATA, (unsigned char)(offset >> 8)); // send high byte
+    port_byte_out(REG_SCREEN_DATA, (uint8_t)(offset >> 8)); // send high byte
     port_byte_out(REG_SCREEN_CTRL, 15); // open port to send
-    port_byte_out(REG_SCREEN_DATA, (unsigned char)(offset & 0xff)); // send low byte
+    port_byte_out(REG_SCREEN_DATA, (uint8_t)(offset & 0xff)); // send low byte
 }
 
 // each rows contain a maximum number of cols
@@ -49,7 +50,7 @@ int get_offset_col(int offset)
 
 int print_char(char c, int col, int row, char attr)
 {
-    u8* video_mem = (u8*)VIDEO_ADDRESS;
+    uint8_t* video_mem = (uint8_t*)VIDEO_ADDRESS;
     if (!attr) // assign default color attribute
         attr = WHITE_ON_BLACK;
 
@@ -90,10 +91,10 @@ int print_char(char c, int col, int row, char attr)
     if (offset >= MAX_ROWS * MAX_COLS * 2)
     {
         for (int i = 1; i < MAX_ROWS; i++)
-            mem_copy((u8*)(get_offset(0, i) + VIDEO_ADDRESS), (u8*)(get_offset(0, i - 1) + VIDEO_ADDRESS), MAX_COLS * 2); // copy video memory of each rows
+            mem_copy((uint8_t*)(get_offset(0, i) + VIDEO_ADDRESS), (uint8_t*)(get_offset(0, i - 1) + VIDEO_ADDRESS), MAX_COLS * 2); // copy video memory of each rows
 
         // clear text on the last line
-        char* last_line = (char*)(get_offset(0, MAX_ROWS - 1) + (u8*)VIDEO_ADDRESS);
+        char* last_line = (char*)(get_offset(0, MAX_ROWS - 1) + (uint8_t*)VIDEO_ADDRESS);
         for (int i = 0; i < MAX_COLS * 2; i++) 
             last_line[i] = 0;
         
@@ -145,7 +146,7 @@ void kprint_backspace()
 void clear_screen()
 {
     int screen_size = MAX_COLS * MAX_ROWS;
-    u8* screen = (u8*)VIDEO_ADDRESS;
+    uint8_t* screen = (uint8_t*)VIDEO_ADDRESS;
 
     // modifying every 2 bytes
     for (int i = 0; i < screen_size; i++)

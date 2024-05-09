@@ -3,18 +3,19 @@
 #include "kernel.h"
 #include "../libc/string.h"
 #include "../libc/mem.h"
+#include <stdint.h>
 
-void main()
+void kernel_main()
 {
     isr_install();
     irq_install();
+    //clear_screen();
 
-    clear_screen();
+    // testing some interrupts
+    asm volatile("int $2");
+    asm volatile("int $3");
+
     kprint("Hello World! I am Sora\n\nKeyboard input is enabled\nType PAGE to request a kmalloc\nType END to halt the processor\n> ");
-
-    // testing some of the interrupts
-    // __asm__ __volatile__("int $2");
-    // __asm__ __volatile__("int $3");
 }
 
 // handling user input
@@ -27,8 +28,8 @@ void user_input(char* input)
     }
     else if (strcmp(input, "PAGE") == 0)
     {
-        u32 physical_address;
-        u32 page = kmalloc(1000, 1, &physical_address);
+        uint32_t physical_address;
+        uint32_t page = kmalloc(1000, 1, &physical_address);
 
         char page_str[16] = "";
         hex_to_ascii(page, page_str);
