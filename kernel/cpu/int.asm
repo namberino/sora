@@ -10,11 +10,14 @@ isr_common_stub: ; saves the processor state, sets up for kernel mode segments, 
     mov es, ax ; set segment register to kernel data segment
     mov fs, ax ; set segment register to kernel data segment
     mov gs, ax ; set segment register to kernel data segment
+    push esp ; register* reg
 
     ; call C-level fault handler
+    cld ; C code following the sysV ABI requires DF to be clear on function entry
     call isr_handler
 
     ; restore stack frame (previous processor state)
+    pop eax ; clear pointer
     pop eax ; restore previous data segment descriptor
     mov ds, ax ; restore segment register to previous state 
     mov es, ax ; restore segment register to previous state 
@@ -22,7 +25,6 @@ isr_common_stub: ; saves the processor state, sets up for kernel mode segments, 
     mov gs, ax ; restore segment register to previous state
     popa
     add esp, 8 ; cleans up the pushed error code and pushed isr number
-    sti
     iret ; pop 5 things at once: cs, eip, eflags, ss, and esp
 
 ; similar to the isr code except for the irq_handler call and the pop ebx
@@ -35,9 +37,12 @@ irq_common_stub:
     mov es, ax
     mov fs, ax
     mov gs, ax
+    push esp
 
+    cld
     call irq_handler
 
+    pop ebx ; clear pointer
     pop ebx ; reload original data segment descriptor
     mov ds, bx
     mov es, bx
@@ -45,7 +50,6 @@ irq_common_stub:
     mov gs, bx
     popa
     add esp, 8
-    sti
     iret
 
 ; we don't know which interrupt was caller when the handler is run, so we will need to have a different handler for every interrupt

@@ -114,14 +114,14 @@ char* exception_msg[] = {
 };
 
 // we print the interrupt code and interrupt message
-void isr_handler(registers_t reg)
+void isr_handler(registers_t* reg)
 {
     kprint("Interrupt: ");
     char str[3];
-    int_to_ascii(reg.int_no, str);
+    int_to_ascii(reg->int_no, str);
     kprint(str);
     kprint("\n");
-    kprint(exception_msg[reg.int_no]);
+    kprint(exception_msg[reg->int_no]);
     kprint("\n");
 }
 
@@ -132,18 +132,18 @@ void register_int_handler(uint8_t n, isr_t handler)
 }
 
 // gets called from asm interrupt handler stub
-void irq_handler(registers_t reg)
+void irq_handler(registers_t* reg)
 {
     // send an EOI (end of interrupt) signal to the PICs after every interrupts (if this interrupt involved the slave)
-    if (reg.int_no >= 40)
+    if (reg->int_no >= 40)
         port_byte_out(0xA0, 0x20); // send reset signal to slave
 
     port_byte_out(0x20, 0x20); // send reset signal to master
 
     // interrupt handling
-    if (int_handlers[reg.int_no] != 0)
+    if (int_handlers[reg->int_no] != 0)
     {
-        isr_t handler = int_handlers[reg.int_no];
+        isr_t handler = int_handlers[reg->int_no];
         handler(reg);
     }
 }

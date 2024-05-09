@@ -38,7 +38,7 @@ const char scancode_ascii[] = {
     ',', '.', '/', '?', '?', '?', ' '
 };
 
-static void keyboard_callback(registers_t regs)
+static void keyboard_callback(registers_t* regs)
 {
     // PIC leaves the scancodes in port 0x60
     uint8_t scancode = port_byte_in(0x60);

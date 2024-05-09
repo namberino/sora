@@ -20,5 +20,5 @@ void set_idt()
     idt_reg.base = (uint32_t) &idt;
     idt_reg.limit = IDT_ENTRIES * sizeof(idt_gate_t) - 1;
     // don't load &idt, always load &idt_reg (because idt_reg is the pointer to the array of the interrupt handlers)
-    __asm__ __volatile__("lidtl (%0)" : : "r" (&idt_reg));
+    asm volatile("lidtl (%0)" : : "r" (&idt_reg));
 }
