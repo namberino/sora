@@ -4,6 +4,8 @@ Sora is a small operating system with a small bootloader and a small kernel
 
 This is a learning project for me so the code is somewhat messy. I've documented everything quite throughly through so if you want to, you can go through the code and learn more about operating system development
 
+![qemu emulation](img/os-emulate-qemu.png)
+
 # Requirements
 
 Before you can compile this, you need to install some tools and libraries first:
