@@ -42,3 +42,13 @@ Before you can compile this, you need to install some tools and libraries first:
 - [x] Interrupt Descriptor Table
 - [x] Parse user input
 - [x] Memory allocator
+
+# Documentation
+
+You can find all the documentations in this [directory](kernel/docs/). I've also added detailed explanation comments for most of the code so you can understand the code by reading it.
+
+# References
+
+- [OSDev Wiki](https://wiki.osdev.org/Main_Page)
+- [University of Birmingham's os-dev.pdf](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)
+- [JamesM's kernel development tutorials](https://web.archive.org/web/20221202213259/http://www.jamesmolloy.co.uk/tutorial_html/1.-Environment%20setup.html)
