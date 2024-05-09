@@ -1,4 +1,4 @@
-# Sora: A mini operating system
+# Sora: A mini hobby operating system
 
 Sora is a small operating system with a small bootloader and a small kernel.
 
