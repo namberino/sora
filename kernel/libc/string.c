@@ -1,4 +1,5 @@
 #include "string.h"
+#include "../cpu/types.h"
 
 // get the length of the string
 int strlen(char str[])
@@ -79,4 +80,33 @@ char char_upper(char c)
         c ^= 0x20; // toggles 5th bit in ascii value
 
     return c;
+}
+
+void hex_to_ascii(int n, char str[])
+{
+    append(str, '0');
+    append(str, 'x');
+    char zeros = 0;
+
+    s32 temp;
+    for (int i = 28; i > 0; i -= 4)
+    {
+        temp = (n >> i) & 0xF;
+
+        if (temp == 0 && zeros == 0)
+            continue;
+
+        zeros = 1;
+
+        if (temp > 0xA)
+            append(str, temp - 0xA + 'a');
+        else
+            append(str, temp + '0');
+    }
+
+    temp = n & 0xF;
+    if (temp >= 0xA)
+        append(str, temp - 0xA + 'a');
+    else
+        append(str, temp + '0');
 }

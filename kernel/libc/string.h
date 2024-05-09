@@ -8,5 +8,6 @@ void backspace(char str[]);
 void append(char str[], char c);
 int strcmp(char str1[], char str2[]);
 char char_upper(char c);
+void hex_to_ascii(int n, char str[]);
 
 #endif

@@ -90,4 +90,4 @@ Page fault interrupt number is **14**, this throws an error code:
 
 When the kernel is sufficiently booted, we will have a kernel heap active and operational. The way we code heaps, though, usually requires that virtual memory is enabled. So we need a simple alternative to allocate memory before the heap is active
 
-As we're allocating quite early on in the kernel bootup, we can make the assumption that nothing that is `kmalloc()'d` will ever need to be `kfree()'d`. So we can just have a pointer (placement address) to some free memory that we pass back to the requestee then increment
+As we're allocating quite early on in the kernel bootup, we can make the assumption that nothing that is `kmalloc()'d` will ever need to be `kfree()'d`. So we can just have a pointer (placement address) to some free memory that we pass back to the requestee then increment (this pointer will keep growing)
