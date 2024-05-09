@@ -5,7 +5,7 @@ OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
 CC = /opt/local/bin/i386-elf-gcc
 GDB = /usr/local/bin/i386-elf-gdb
-CFLAGS = -g -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
+CFLAGS = -g -ffreestanding -Wall -Wextra -fno-exceptions -m32
 
 # run by default
 kernel-image.bin: boot/bootsector.bin kernel.bin
