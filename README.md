@@ -17,6 +17,11 @@ Before you can compile this, you need to install some tools and libraries first:
 - [gmp](https://gmplib.org/)
 - [mpfr](https://www.mpfr.org/)
 
+# Project structure
+
+- [bootsector](bootsector) directory is some mini bootsector projects that I made to get used to programming the bootsector
+- [kernel](kernel) is where you'll find the source code for Sora. Compile and run the kernel there.
+
 # Useful commands
 
 | Commands | Description |
