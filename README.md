@@ -34,4 +34,4 @@ Before you can compile this, you need to install some tools and libraries first:
 - [x] Video driver
 - [x] Interrupt Descriptor Table
 - [x] Parse user input
-- [ ] Memory allocator
+- [x] Memory allocator
