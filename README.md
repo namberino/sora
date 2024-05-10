@@ -21,8 +21,49 @@ Before you can compile this, you need to install some tools and libraries first:
 
 # Project structure
 
-- The [bootsector](bootsector) directory is some mini bootsector projects that I made to get used to programming the bootsector.
-- The [kernel](kernel) directory is where you'll find the source code for Sora. Compile and run the kernel there.
+```
+sora
+├─ boot
+│  ├─ bootsector.asm
+│  ├─ disk.asm
+│  ├─ enter32.asm
+│  ├─ gdt.asm
+│  ├─ kernel-entry.asm
+│  ├─ print-hex.asm
+│  ├─ print.asm
+│  └─ print32.asm
+├─ cpu
+│  ├─ idt.c
+│  ├─ idt.h
+│  ├─ int.asm
+│  ├─ isr.c
+│  ├─ isr.h
+│  ├─ ports.c
+│  ├─ ports.h
+│  ├─ timer.c
+│  ├─ timer.h
+│  └─ type.h
+├─ drivers
+│  ├─ keyboard.c
+│  ├─ keyboard.h
+│  ├─ screen.c
+│  └─ screen.h
+├─ kernel
+│  ├─ kernel.c
+│  ├─ kernel.h
+├─ libc
+│  ├─ function.h
+│  ├─ mem.c
+│  ├─ mem.h
+│  ├─ string.c
+│  └─ string.h
+```
+
+- [boot](boot) contains the bootsector code.
+- [cpu](cpu) contains some CPU dependent code like IDT, ISR, etc.
+- [drivers](drivers) contains hardware drivers code.
+- [kernel](kernel) contains the main kernel function code.
+- [libc](libc) contains a custom standard library.
 
 # Useful commands
 
@@ -47,7 +88,7 @@ Before you can compile this, you need to install some tools and libraries first:
 
 # Documentation
 
-You can find all the documentations in this [directory](kernel/docs/). I've also added detailed explanation comments for most of the code so you can understand the code by reading it.
+You can find all the documentations in this [directory](docs). I've also added detailed explanation comments for most of the code so you can understand the code by reading it.
 
 # References
 
@@ -55,3 +96,4 @@ You can find all the documentations in this [directory](kernel/docs/). I've also
 - [University of Birmingham's os-dev.pdf](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)
 - [JamesM's kernel development tutorials](https://web.archive.org/web/20221202213259/http://www.jamesmolloy.co.uk/tutorial_html/1.-Environment%20setup.html)
 - [Intel 64 and IA-32 Architectures Software Developer’s Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+
