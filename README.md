@@ -12,7 +12,7 @@ This is a big learning project for me so the code is somewhat messy. I've docume
 
 Before you can compile this, you need to install some tools and libraries first:
 
-- [NASM](https://www.nasm.org/)
+- [NASM](https://www.nasm.us/)
 - [QEMU](https://www.qemu.org/)
 - [i386-elf-toolchain](https://github.com/nativeos/i386-elf-toolchain/releases)
 - [binutils](https://www.gnu.org/software/binutils/)
