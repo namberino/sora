@@ -3,8 +3,8 @@ HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h libc/*.h)
 ASM_SRC = $(wildcard cpu/*.asm)
 OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
-CC = /opt/local/bin/i386-elf-gcc
-GDB = /usr/local/bin/i386-elf-gdb
+CC = /opt/local/bin/i386-elf-gcc # change this to path to your i386 gcc
+GDB = /usr/local/bin/i386-elf-gdb # change this to path to your i386 gdb
 CFLAGS = -g -ffreestanding -Wall -Wextra -fno-exceptions -m32
 
 # run by default
