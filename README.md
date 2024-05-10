@@ -19,6 +19,12 @@ Before you can compile this, you need to install some tools and libraries first:
 - [gmp](https://gmplib.org/)
 - [mpfr](https://www.mpfr.org/)
 
+You need to change the i386 compiler and i386 debugger paths in [Makefile](Makefile) to the path of your i386 compiler and debugger on your system:
+```
+CC = PATH_TO_i386_COMPILER # change this to path to your i386 compiler
+GDB = PATH_TO_i386_DEBUGGER # change this to path to your i386 gdb
+```
+
 # Project structure
 
 ```
