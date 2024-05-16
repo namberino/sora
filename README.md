@@ -91,6 +91,7 @@ sora
 - [x] Interrupt Descriptor Table
 - [x] Parse user input
 - [x] Memory allocator
+- [ ] Switch to GRUB
 
 # Documentation
 
