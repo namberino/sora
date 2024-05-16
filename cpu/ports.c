@@ -1,5 +1,7 @@
 #include "ports.h"
 
+// weird assembly syntax stuff
+
 // read bytes from specific port
 uint8_t port_byte_in(uint16_t port)
 {
@@ -21,9 +23,9 @@ void port_byte_out(unsigned short port, unsigned char data)
     asm volatile("out %%al, %%dx" : : "a" (data), "d" (port));
 }
 
-unsigned short port_word_in(unsigned short port)
+uint16_t port_word_in(unsigned short port)
 {
-    unsigned short result;
+    uint16_t result;
     asm("in %%dx, %%ax" : "=a" (result) : "d" (port));
     return result;
 }
@@ -31,4 +33,16 @@ unsigned short port_word_in(unsigned short port)
 void port_word_out(unsigned short port, unsigned short data)
 {
     asm volatile("out %%al, %%dx" : : "a" (data), "d" (port));
+}
+
+uint32_t port_dword_in(uint16_t port)
+{
+    uint32_t result;
+    asm("in %%dx, %%eax" : "=a" (result) : "d" (port)); 
+    return result;
+}
+
+void port_dword_out(uint16_t port, uint16_t data)
+{
+    asm volatile("out %%eax, %%dx" : : "a" (data), "d" (port));
 }
