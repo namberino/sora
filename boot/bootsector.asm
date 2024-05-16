@@ -17,12 +17,12 @@ call switch_to_pm ; switch to protected mode, we won't return from this
 
 jmp $
 
-%include "../bootsector/functions/print.asm"
-%include "../bootsector/functions/print-hex.asm"
-%include "../bootsector/disk/disk.asm"
-%include "../bootsector/32bit/gdt/gdt.asm"
-%include "../bootsector/32bit/print/print.asm"
-%include "../bootsector/32bit/enter/enter32.asm"
+%include "boot/print.asm"
+%include "boot/print-hex.asm"
+%include "boot/disk.asm"
+%include "boot/gdt.asm"
+%include "boot/print32.asm"
+%include "boot/enter32.asm"
 
 [bits 16]
 load_kernel:
