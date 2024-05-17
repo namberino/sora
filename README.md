@@ -107,7 +107,7 @@ You can find all the documentations in this [directory](docs). I've also added d
 
 # References
 
-- [OSDev Wiki](https://wiki.osdev.org/Main_Page)
+- [OSDev Wiki](https://wiki.osdev.org/Main_Page) (Main resource)
 - [University of Birmingham's os-dev.pdf](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)
 - [JamesM's kernel development tutorials](https://web.archive.org/web/20221202213259/http://www.jamesmolloy.co.uk/tutorial_html/1.-Environment%20setup.html)
 - [Intel 64 and IA-32 Architectures Software Developer’s Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
