@@ -5,7 +5,7 @@
 
 typedef uint8_t boolean;
 
-#define TRUE (boolean) 1;
-#define FALSE (boolean) 0;
+#define TRUE (boolean) 1
+#define FALSE (boolean) 0
 
 #endif

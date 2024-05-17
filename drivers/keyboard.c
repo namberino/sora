@@ -2,7 +2,8 @@
 
 // scancode (reference https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html)
 
-int cap = 0;
+boolean cap = 0;
+boolean capslock = FALSE;
 static char key_buffer[256]; // buffer
 
 const char* scancode_name[] = { 
@@ -27,8 +28,13 @@ static void keyboard_callback(registers_t* regs)
     // PIC leaves the scancodes in port 0x60
     uint8_t scancode = port_byte_in(0x60);
 
-    if (scancode == LSHIFT_UP || scancode == RSHIFT_UP || scancode == CAPSLOCK_UP)
-        cap = 0;
+    if (scancode == LSHIFT_UP || scancode == RSHIFT_UP)
+        cap = FALSE;
+
+    if (scancode == CAPSLOCK_DOWN && capslock == TRUE)
+        capslock = FALSE;
+    else if (scancode == CAPSLOCK_DOWN && capslock == FALSE)
+        capslock = TRUE;
 
     if (scancode > SCANCODE_MAX)
         return;
@@ -49,14 +55,14 @@ static void keyboard_callback(registers_t* regs)
     }
     else if (scancode == LSHIFT_DOWN || scancode == RSHIFT_DOWN || scancode == CAPSLOCK_DOWN)
     {
-        if (cap == 0)
-            cap = 1;
+        if (cap == FALSE)
+            cap = TRUE;
     }
     else
     {
         char letter = scancode_ascii[(int)scancode];
 
-        if (cap == 1)
+        if (cap == TRUE || capslock == TRUE)
             letter = char_upper(letter);
 
         append(key_buffer, letter); // append to key buffer

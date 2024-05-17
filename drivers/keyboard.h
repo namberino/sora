@@ -6,6 +6,7 @@
 #include "screen.h"
 #include "../libc/string.h"
 #include "../libc/function.h"
+#include "../libc/boolean.h"
 #include "../kernel/kernel.h"
 #include <stdint.h>
 
