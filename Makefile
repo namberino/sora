@@ -16,7 +16,7 @@ sora.img: boot/bootsector.bin kernel.bin
 
 # '--oformat binary' automatically strips symbols
 kernel.bin: boot/kernel-entry.o ${OBJ}
-	i386-elf-ld -o $@ -Ttext 0x1000 $^ -no-pie --oformat binary --allow-multiple-definition
+	i386-elf-ld -no-pie -o $@ -Ttext 0x1000 $^ --oformat binary --allow-multiple-definition
 
 # for debugging
 kernel.elf: boot/kernel-entry.o ${OBJ}

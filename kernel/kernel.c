@@ -2,14 +2,25 @@
 
 void kernel_main()
 {
+    clear_screen();
     isr_install();
     irq_install();
 
     // testing some interrupts
-    asm volatile("int $2");
-    asm volatile("int $3");
+    // asm volatile("int $2");
+    // asm volatile("int $3");
 
-    kprint("Hello World! I am Sora\n\nKeyboard input is enabled\nType PAGE to request a kmalloc\nType END to halt the processor\n> ");
+    kprint_color("Hello World! I am Sora OS.\n", OUTPUT_COLOR);
+    kprint_color("Type HELP for the list of available commands\n", OUTPUT_COLOR);
+    kprint_color("> ", CMD_PROMPT_COLOR);
+}
+
+void kprint_help()
+{
+    kprint_color("BEEP: Play beep sound\n", OUTPUT_COLOR);
+    kprint_color("CLEAR: Clear the screen\n", OUTPUT_COLOR);
+    kprint_color("PAGE: Request a page allocation\n", OUTPUT_COLOR);
+    kprint_color("END: Stop the CPU\n", OUTPUT_COLOR);
 }
 
 // handling user input
@@ -17,8 +28,12 @@ void user_input(char* input)
 {
     if (strcmp(input, "END") == 0)
     {
-        kprint("Stopping the CPU\n");
+        kprint_color("Stopping the CPU\n", OUTPUT_COLOR);
         asm volatile("hlt");
+    }
+    else if (strcmp(input, "HELP") == 0)
+    {
+        kprint_help();
     }
     else if (strcmp(input, "PAGE") == 0)
     {
@@ -30,10 +45,10 @@ void user_input(char* input)
         char physical_address_str[16] = "";
         hex_to_ascii(physical_address, physical_address_str);
 
-        kprint("Page: ");
-        kprint(page_str);
-        kprint(", physical address: ");
-        kprint(physical_address_str);
+        kprint_color("Page: ", OUTPUT_COLOR);
+        kprint_color(page_str, OUTPUT_COLOR);
+        kprint_color(", physical address: ", OUTPUT_COLOR);
+        kprint_color(physical_address_str, OUTPUT_COLOR);
         kprint("\n");
     }
     else if (strcmp(input, "CLEAR") == 0)
@@ -42,11 +57,11 @@ void user_input(char* input)
     }
     else if (strcmp(input, "BEEP") == 0)
     {
-        kprint("Beeping\n");
         beep();
     }
     
     kprint("Input is: ");
     kprint(input);
-    kprint("\n> ");
+    kprint("\n");
+    kprint_color("> ", CMD_PROMPT_COLOR);
 }

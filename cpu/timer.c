@@ -49,7 +49,7 @@ void set_pit2(uint32_t frequency)
     // send the command 
     port_byte_out(0x43, 0xb6); // send command byte to command port (0xb6 is rate generator mode, used for pwm)
     
-    // set divisor value (0x42 to set it on channel 2 of PIT)
+    // set divisor value (0x42 to set it on timer 2 of PIT)
     port_byte_out(0x42, low);
     port_byte_out(0x42, high);
 }
