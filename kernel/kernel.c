@@ -12,7 +12,7 @@ void kernel_main()
 
     kprint_color("Hello World! I am Sora OS.\n", OUTPUT_COLOR);
     kprint_color("Type HELP for the list of available commands\n", OUTPUT_COLOR);
-    kprint_color("> ", CMD_PROMPT_COLOR);
+    kprint_cmd_prompt();
 }
 
 void kprint_help()
@@ -21,6 +21,11 @@ void kprint_help()
     kprint_color("CLEAR: Clear the screen\n", OUTPUT_COLOR);
     kprint_color("PAGE: Request a page allocation\n", OUTPUT_COLOR);
     kprint_color("END: Stop the CPU\n", OUTPUT_COLOR);
+}
+
+void kprint_cmd_prompt()
+{
+    kprint_color("> ", CMD_PROMPT_COLOR);
 }
 
 // handling user input
@@ -59,9 +64,15 @@ void user_input(char* input)
     {
         beep();
     }
+    else
+    {
+        kprint_color("Invalid command: ", ERROR_COLOR_1);
+        kprint_color(input, CMD_COLOR);
+        kprint("\n");
+    }
     
-    kprint("Input is: ");
-    kprint(input);
-    kprint("\n");
-    kprint_color("> ", CMD_PROMPT_COLOR);
+    // kprint("Input is: ");
+    // kprint(input);
+    // kprint("\n");
+    kprint_cmd_prompt();
 }

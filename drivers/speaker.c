@@ -21,7 +21,7 @@ void beep()
 {
     asm volatile("sti"); // enable interrupts
     play_sound(1000); // 1000Hz sound
-    halt_timer(10);
+    halt_timer(5); // play for 5 ticks
     no_sound();
     set_pit2(50);
 }

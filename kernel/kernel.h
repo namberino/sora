@@ -12,5 +12,6 @@
 
 void user_input(char* input);
 void kprint_help();
+void kprint_cmd_prompt();
 
 #endif
