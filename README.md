@@ -39,6 +39,8 @@ sora
 │  ├─ print.asm
 │  └─ print32.asm
 ├─ cpu
+│  ├─ hlt.c
+│  ├─ hlt.h
 │  ├─ idt.c
 │  ├─ idt.h
 │  ├─ int.asm
@@ -53,11 +55,14 @@ sora
 │  ├─ keyboard.c
 │  ├─ keyboard.h
 │  ├─ screen.c
-│  └─ screen.h
+│  ├─ screen.h
+│  ├─ speaker.c
+│  └─ speaker.h
 ├─ kernel
 │  ├─ kernel.c
-│  ├─ kernel.h
+│  └─ kernel.h
 ├─ libc
+│  ├─ boolean.h
 │  ├─ function.h
 │  ├─ mem.c
 │  ├─ mem.h
