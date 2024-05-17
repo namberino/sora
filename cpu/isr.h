@@ -1,6 +1,12 @@
 #ifndef ISR_H
 #define ISR_H
 
+#include "ports.h"
+#include "idt.h"
+#include "../libc/string.h"
+#include "../drivers/screen.h"
+#include "../drivers/keyboard.h"
+#include "timer.h"
 #include <stdint.h>
 
 // 32 ISR reserved for special CPU interrupts:

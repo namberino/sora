@@ -1,10 +1,4 @@
-#include "ports.h"
 #include "isr.h"
-#include "idt.h"
-#include "../libc/string.h"
-#include "../drivers/screen.h"
-#include "../drivers/keyboard.h"
-#include "timer.h"
 
 isr_t int_handlers[256];
 

@@ -1,5 +1,4 @@
 #include "string.h"
-#include <stdint.h>
 
 // get the length of the string
 int strlen(char str[])

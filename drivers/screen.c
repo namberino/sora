@@ -1,7 +1,4 @@
 #include "screen.h"
-#include "../cpu/ports.h"
-#include "../libc/mem.h"
-#include <stdint.h>
 
 // this uses vga ports to get current cursor position offset
 // get high byte (byte 14) and low byte (byte 15)
