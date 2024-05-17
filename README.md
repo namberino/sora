@@ -96,6 +96,10 @@ sora
 - [x] Interrupt Descriptor Table
 - [x] Parse user input
 - [x] Memory allocator
+- [ ] Frame allocation
+- [ ] Heap
+- [ ] Virtual File System
+- [ ] User mode
 - [ ] Switch to GRUB
 
 # Documentation
