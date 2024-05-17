@@ -22,7 +22,7 @@ kernel.elf: boot/kernel-entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^
 
 run: sora.img
-	qemu-system-i386 -fda $< -audiodev alsa,id=default -machine pcspk-audiodev=default
+	qemu-system-i386 -fda $< -audiodev coreaudio,id=default -machine pcspk-audiodev=default
 
 # open connection to qemu on port 1234
 # load kernel object with symbols
