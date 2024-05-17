@@ -49,13 +49,13 @@ int print_char(char c, int col, int row, char attr)
 {
     uint8_t* video_mem = (uint8_t*)VIDEO_ADDRESS;
     if (!attr) // assign default color attribute
-        attr = BRIGHTWHITE_ON_BLACK;
+        attr = DEFAULT_COLOR;
 
     // print red E if coordinates aren't right
     if (col >= MAX_COLS || row >= MAX_ROWS)
     {
         video_mem[2 * MAX_COLS * MAX_ROWS - 2] = 'E';
-        video_mem[2 * MAX_COLS * MAX_ROWS - 1] = RED_ON_WHITE;
+        video_mem[2 * MAX_COLS * MAX_ROWS - 1] = ERROR_COLOR_2;
 
         return get_offset(col, row);
     }
@@ -102,9 +102,7 @@ int print_char(char c, int col, int row, char attr)
     return offset;
 }
 
-// print message at specified location
-// if rol and col is negative, use current location
-void kprint_at(char* message, int col, int row)
+void kprint_color_at(char* message, int col, int row, char color)
 {
     int offset;
 
@@ -120,16 +118,28 @@ void kprint_at(char* message, int col, int row)
     int i = 0;
     while (message[i] != 0)
     {
-        offset = print_char(message[i++], col, row, BRIGHTWHITE_ON_BLACK);
+        offset = print_char(message[i++], col, row, color);
         row = get_offset_row(offset);
         col = get_offset_col(offset);
     }
 }
 
+void kprint_color(char* message, char color)
+{
+    kprint_color_at(message, -1, -1, color);
+}
+
+// print message at specified location
+// if rol and col is negative, use current location
+void kprint_at(char* message, int col, int row)
+{
+    kprint_color_at(message, col, row, DEFAULT_COLOR);
+}
+
 // print at current location
 void kprint(char* message)
 {
-    kprint_at(message, -1, -1);
+    kprint_color(message, DEFAULT_COLOR);
 }
 
 void kprint_backspace()
@@ -137,7 +147,7 @@ void kprint_backspace()
     int offset = get_cursor_offset() - 2;
     int row = get_offset_row(offset);
     int col = get_offset_col(offset);
-    print_char(0x08, col, row, BRIGHTWHITE_ON_BLACK);
+    print_char(0x08, col, row, CMD_COLOR);
 }
 
 void clear_screen()
@@ -149,7 +159,7 @@ void clear_screen()
     for (int i = 0; i < screen_size; i++)
     {
         screen[i * 2] = ' ';
-        screen[i * 2 + 1] = BRIGHTWHITE_ON_BLACK;
+        screen[i * 2 + 1] = CLEAR_SCREEN_COLOR;
     }
 
     set_cursor_offset(get_offset(0, 0));

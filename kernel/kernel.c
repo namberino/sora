@@ -4,7 +4,6 @@ void kernel_main()
 {
     isr_install();
     irq_install();
-    //clear_screen();
 
     // testing some interrupts
     asm volatile("int $2");
@@ -36,6 +35,10 @@ void user_input(char* input)
         kprint(", physical address: ");
         kprint(physical_address_str);
         kprint("\n");
+    }
+    else if (strcmp(input, "CLEAR") == 0)
+    {
+        clear_screen();
     }
     
     kprint("Input is: ");
