@@ -11,7 +11,7 @@ void kernel_main()
     // asm volatile("int $3");
 
     kprint_color("Hello World! I am Sora OS.\n", OUTPUT_COLOR);
-    kprint_color("Type HELP for the list of available commands\n", OUTPUT_COLOR);
+    kprint_color("Type HELP for the list of available commands\n\n", OUTPUT_COLOR);
     kprint_cmd_prompt();
 }
 
@@ -51,9 +51,9 @@ void user_input(char* input)
         hex_to_ascii(physical_address, physical_address_str);
 
         kprint_color("Page: ", OUTPUT_COLOR);
-        kprint_color(page_str, OUTPUT_COLOR);
+        kprint_color(page_str, VAR_COLOR);
         kprint_color(", physical address: ", OUTPUT_COLOR);
-        kprint_color(physical_address_str, OUTPUT_COLOR);
+        kprint_color(physical_address_str, VAR_COLOR);
         kprint("\n");
     }
     else if (strcmp(input, "CLEAR") == 0)
