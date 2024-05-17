@@ -6,7 +6,7 @@ This project was started in January 2024. At the time, I had finished an operati
 
 This is a big learning project for me so the code is somewhat messy. I've documented everything quite throughly through so if you want to, you can go through the code and learn more about operating system development.
 
-![qemu emulation](img/os-emulate-qemu.png)
+![qemu emulation](img/sora-qemu.png)
 
 # Requirements
 
