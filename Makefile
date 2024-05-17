@@ -5,22 +5,24 @@ OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
 CC = /opt/local/bin/i386-elf-gcc # change this to path to your i386 gcc
 GDB = /usr/local/bin/i386-elf-gdb # change this to path to your i386 gdb
-CFLAGS = -g -ffreestanding -Wall -Wextra -fno-exceptions -m32
+CFLAGS = -g -m32 -ffreestanding -fno-PIC -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
 
 # run by default
-kernel-image.bin: boot/bootsector.bin kernel.bin
-	cat $^ > kernel-image.bin
+sora.img: boot/bootsector.bin kernel.bin
+	cat $^ > sora.bin
+	dd if=/dev/zero bs=512 count=2880 >> $@
+	dd if=sora.bin of=$@ conv=notrunc
 
 # '--oformat binary' automatically strips symbols
 kernel.bin: boot/kernel-entry.o ${OBJ}
-	i386-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
+	i386-elf-ld -no-pie -o $@ -Ttext 0x1000 $^ --oformat binary --allow-multiple-definition
 
 # for debugging
 kernel.elf: boot/kernel-entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^
 
-run: kernel-image.bin
-	qemu-system-i386 -fda kernel-image.bin
+run: sora.img
+	qemu-system-i386 -fda $< -audiodev alsa,id=default -machine pcspk-audiodev=default
 
 # open connection to qemu on port 1234
 # load kernel object with symbols
@@ -39,5 +41,5 @@ debug: kernel-image.bin kernel.elf
 	nasm -f bin $< -o $@
 
 clean:
-	rm -rf *.bin *.dis *.o *.elf kernel-image.bin 
+	rm -rf *.bin *.dis *.o *.elf sora.img
 	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o libc/*.o

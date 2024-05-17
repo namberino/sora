@@ -40,6 +40,11 @@ void user_input(char* input)
     {
         clear_screen();
     }
+    else if (strcmp(input, "BEEP") == 0)
+    {
+        kprint("Beeping\n");
+        beep();
+    }
     
     kprint("Input is: ");
     kprint(input);

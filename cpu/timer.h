@@ -7,7 +7,7 @@
 #include <stdint.h>
 
 void init_timer(uint32_t frequency);
-void set_pit(uint32_t frequency);
+void set_pit2(uint32_t frequency);
 void halt_timer(uint32_t halt_ticks);
 
 #endif

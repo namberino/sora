@@ -37,7 +37,7 @@ void init_timer(uint32_t frequency)
 }
 
 // function for setting the PIT frequency after initialization
-void set_pit(uint32_t frequency)
+void set_pit2(uint32_t frequency)
 {
     // get PIT value for clock at 1193180 Hz
     uint32_t divisor = 1193180 / frequency;
@@ -49,7 +49,7 @@ void set_pit(uint32_t frequency)
     // send the command 
     port_byte_out(0x43, 0x36); // send command byte to command port (0x36 sets PIT to repeating mode so that when the divisor counter reaches zero it's automatically refreshed)
     
-    // set divisor value (0x42 to set it after initialization)
+    // set divisor value (0x42 to set it on channel 2 of PIT)
     port_byte_out(0x42, low);
     port_byte_out(0x42, high);
 }
