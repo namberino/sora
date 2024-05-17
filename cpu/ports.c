@@ -23,6 +23,7 @@ void port_byte_out(unsigned short port, unsigned char data)
     asm volatile("out %%al, %%dx" : : "a" (data), "d" (port));
 }
 
+// dealing with 16-bit words
 uint16_t port_word_in(unsigned short port)
 {
     uint16_t result;
@@ -35,6 +36,7 @@ void port_word_out(unsigned short port, unsigned short data)
     asm volatile("out %%al, %%dx" : : "a" (data), "d" (port));
 }
 
+// double words handling
 uint32_t port_dword_in(uint16_t port)
 {
     uint32_t result;
