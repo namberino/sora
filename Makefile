@@ -8,6 +8,7 @@ GDB = /usr/local/bin/i386-elf-gdb # change this to path to your i386 gdb
 CFLAGS = -g -m32 -ffreestanding -fno-PIC -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
 
 # run by default
+# appends 2880 blocks of 0s, each block is 512 bytes in size (standard floppy disk size)
 sora.img: boot/bootsector.bin kernel.bin
 	cat $^ > sora.bin
 	dd if=/dev/zero bs=512 count=2880 >> $@
@@ -15,7 +16,7 @@ sora.img: boot/bootsector.bin kernel.bin
 
 # '--oformat binary' automatically strips symbols
 kernel.bin: boot/kernel-entry.o ${OBJ}
-	i386-elf-ld -no-pie -o $@ -Ttext 0x1000 $^ --oformat binary --allow-multiple-definition
+	i386-elf-ld -o $@ -Ttext 0x1000 $^ -no-pie --oformat binary --allow-multiple-definition
 
 # for debugging
 kernel.elf: boot/kernel-entry.o ${OBJ}

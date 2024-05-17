@@ -26,7 +26,7 @@ void init_timer(uint32_t frequency)
 
     // divisor has to be sent byte-wise, so split into upper and lower bytes
     uint8_t low  = (uint8_t)(divisor & 0xFF);
-    uint8_t high = (uint8_t)( (divisor >> 8) & 0xFF);
+    uint8_t high = (uint8_t)((divisor >> 8) & 0xFF);
     
     // send the command 
     port_byte_out(0x43, 0x36); // send command byte to command port (0x36 sets PIT to repeating mode so that when the divisor counter reaches zero it's automatically refreshed)
@@ -44,10 +44,10 @@ void set_pit2(uint32_t frequency)
 
     // divisor has to be sent byte-wise, so split into upper and lower bytes
     uint8_t low  = (uint8_t)(divisor & 0xFF);
-    uint8_t high = (uint8_t)( (divisor >> 8) & 0xFF);
+    uint8_t high = (uint8_t)((divisor >> 8) & 0xFF);
 
     // send the command 
-    port_byte_out(0x43, 0x36); // send command byte to command port (0x36 sets PIT to repeating mode so that when the divisor counter reaches zero it's automatically refreshed)
+    port_byte_out(0x43, 0xb6); // send command byte to command port (0xb6 is rate generator mode, used for pwm)
     
     // set divisor value (0x42 to set it on channel 2 of PIT)
     port_byte_out(0x42, low);
