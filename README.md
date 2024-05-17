@@ -100,7 +100,6 @@ sora
 - [ ] Heap
 - [ ] Virtual File System
 - [ ] User mode
-- [ ] Switch to GRUB
 
 # Documentation
 
