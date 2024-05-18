@@ -44,3 +44,27 @@ uint32_t kmalloc_int(size_t size, int align, uint32_t* physical_address)
 
     return loc;
 }
+
+// returns aligned page
+uint32_t kmalloc_a(uint32_t size)
+{
+    return kmalloc_int(size, 1, 0);
+}
+
+// returns physical pages
+uint32_t kmalloc_p(uint32_t size, uint32_t* physical_address)
+{
+    return kmalloc_int(size, 0, physical_address);
+}
+
+// returns aligned physical pages
+uint32_t kmalloc_ap(uint32_t size, uint32_t* physical_address)
+{
+    return kmalloc_int(size, 1, physical_address);
+}
+
+// standard kmalloc
+uint32_t kmalloc(uint32_t size)
+{
+    return kmalloc_int(size, 0, 0);
+}
