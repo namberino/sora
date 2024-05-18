@@ -70,11 +70,13 @@ sora
 │  └─ string.h
 ```
 
-- [boot](boot) contains the bootsector code.
-- [cpu](cpu) contains some CPU dependent code like IDT, ISR, etc.
-- [drivers](drivers) contains hardware drivers code.
-- [kernel](kernel) contains the main kernel function code.
-- [libc](libc) contains a custom standard library.
+| Directory | Description |
+| --- | --- |
+| [boot](boot) | Bootsector code |
+| [cpu](cpu) | CPU dependent code like IDT, ISR, etc |
+| [drivers](drivers) | Hardware drivers |
+| [kernel](kernel) | Main kernel code |
+| [libc](libc) | Custom standard library |
 
 # Useful commands
 
