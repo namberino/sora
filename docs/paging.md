@@ -24,7 +24,6 @@ Virtual memory is an abstract concept so we need to implement it in someway, bot
 
 Segmentation is becoming obsolete and paging is the newer, better alternative for x86 architectures
 
-
 # Paging
 
 Paging works by splitting the virtual address space into blocks called pages, which are usually *4KB* in size. Pages can then be mapped on to frames (equally sized blocks of physical memory)
@@ -91,3 +90,9 @@ Page fault interrupt number is **14**, this throws an error code:
 When the kernel is sufficiently booted, we will have a kernel heap active and operational. The way we code heaps, though, usually requires that virtual memory is enabled. So we need a simple alternative to allocate memory before the heap is active
 
 As we're allocating quite early on in the kernel bootup, we can make the assumption that nothing that is `kmalloc()'d` will ever need to be `kfree()'d`. So we can just have a pointer (placement address) to some free memory that we pass back to the requestee then increment (this pointer will keep growing)
+
+# Page alignment
+
+If you have memory that is paged (swapped in and out of disk) or cached then arranging blocks such as structures or arrays so that they don't cross a boundary speeds up processing because it ensures the memory doesn't need to be swapped or cache lines filled when the code accesses different parts of the block.
+
+Page alignment is also helpful when protecting different parts of memory from being accessed by non-privileged processes as the protection hardware only has a limited number of registers so whole pages are protected rather than individual bytes or words.
