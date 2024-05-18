@@ -62,7 +62,7 @@ Intel CPU uses a 2-tier system: The CPU gets told about a page directory, which 
 
 This way, The entire 4GB address space can be covered with the advantage that if a page table has no entries, it can be freed and it's present flag unset in the page directory
 
-![page directory layout](../../img/page-directory-layout.png)
+![page directory layout](../img/page-directory-layout.png)
 
 ## Enable paging
 

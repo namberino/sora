@@ -3,6 +3,7 @@
 
 #include "ports.h"
 #include "isr.h"
+#include "../libc/mem.h"
 #include <stdint.h>
 
 // reference docs/paging.md to understand each part of the code
@@ -23,6 +24,13 @@ typedef struct page_table
     page_t pages[1024];
 } page_table_t;
 
+// physical_address will be used when we clone directories (not yet implemented)
+// new directory will have an address in virtual memory that's not the same as physical memory so we need the physical address if we want to switch directories
+
+// table_physical_addresses is used for accessing the page tables
+// problem: a page directory must hold physical addresses, not virtual addresses, and the only way to read/write to memory is through virtual addresses
+// solution: for every page directory, keep 2 arrays, 1 for holding physical addresses of its page tables (for giving to the cpu), 1 for holding virtual addresses (for read/write)
+// this gives us an extra 4kb overhead per page directory
 typedef struct page_directory
 {
     page_table_t* tables[1024]; // array of pointers to page tables
