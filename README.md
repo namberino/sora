@@ -70,11 +70,13 @@ sora
 │  └─ string.h
 ```
 
-- [boot](boot) contains the bootsector code.
-- [cpu](cpu) contains some CPU dependent code like IDT, ISR, etc.
-- [drivers](drivers) contains hardware drivers code.
-- [kernel](kernel) contains the main kernel function code.
-- [libc](libc) contains a custom standard library.
+| Directory | Description |
+| --- | --- |
+| [boot](boot) | Bootsector code |
+| [cpu](cpu) | CPU dependent code like IDT, ISR, etc |
+| [drivers](drivers) | Hardware drivers |
+| [kernel](kernel) | Main kernel code |
+| [libc](libc) | Custom standard library |
 
 # Useful commands
 
@@ -109,6 +111,6 @@ You can find all the documentations in this [directory](docs). I've also added d
 
 - [OSDev Wiki](https://wiki.osdev.org/Main_Page) (Main resource)
 - [University of Birmingham's os-dev.pdf](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)
-- [JamesM's kernel development tutorials](https://web.archive.org/web/20221202213259/http://www.jamesmolloy.co.uk/tutorial_html/1.-Environment%20setup.html)
+- [The little book about OS development](https://littleosbook.github.io/)
 - [Intel 64 and IA-32 Architectures Software Developer’s Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
 

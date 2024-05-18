@@ -25,8 +25,9 @@ void mem_copy(uint8_t* source, uint8_t* destination, int nbytes)
     }
 }
 
+// internal kmalloc
 // can be used to request an aligned page, it will also return the real, physical address, for later use
-uint32_t kmalloc(size_t size, int align, uint32_t* physical_address)
+uint32_t kmalloc_int(size_t size, int align, uint32_t* physical_address)
 {
     // pages are aligned to 4kb or 0x1000
     if (align == 1 && (free_mem_address & 0xFFFFF000)) // checks if the address is not already aligned, if not then alight it
@@ -42,4 +43,28 @@ uint32_t kmalloc(size_t size, int align, uint32_t* physical_address)
     free_mem_address += size; // increment free address pointer to outside of specified size
 
     return loc;
+}
+
+// returns aligned page
+uint32_t kmalloc_a(uint32_t size)
+{
+    return kmalloc_int(size, 1, 0);
+}
+
+// returns physical pages
+uint32_t kmalloc_p(uint32_t size, uint32_t* physical_address)
+{
+    return kmalloc_int(size, 0, physical_address);
+}
+
+// returns aligned physical pages
+uint32_t kmalloc_ap(uint32_t size, uint32_t* physical_address)
+{
+    return kmalloc_int(size, 1, physical_address);
+}
+
+// standard kmalloc
+uint32_t kmalloc(uint32_t size)
+{
+    return kmalloc_int(size, 0, 0);
 }
