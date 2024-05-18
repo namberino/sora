@@ -43,7 +43,7 @@ void user_input(char* input)
     else if (strcmp(input, "PAGE") == 0)
     {
         uint32_t physical_address;
-        uint32_t page = kmalloc(1000, 1, &physical_address);
+        uint32_t page = kmalloc_int(1000, 1, &physical_address);
 
         char page_str[16] = "";
         hex_to_ascii(page, page_str);
