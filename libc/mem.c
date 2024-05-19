@@ -30,7 +30,7 @@ void mem_copy(uint8_t* source, uint8_t* destination, int nbytes)
 uint32_t kmalloc_int(size_t size, int align, uint32_t* physical_address)
 {
     // pages are aligned to 4kb or 0x1000
-    if (align == 1 && (free_mem_address & 0xFFFFF000)) // checks if the address is not already aligned, if not then alight it
+    if (align == 1 && (free_mem_address & 0x00000FFF)) // checks if the address is not already aligned, if not then alight it
     {
         free_mem_address &= 0xFFFFF000; // get the 5 MSB (4kb)
         free_mem_address += 0x1000;

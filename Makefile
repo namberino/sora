@@ -5,7 +5,7 @@ OBJ = ${C_SRC:.c=.o} ${ASM_SRC:.asm=.o} # file extension replacement
 
 CC = /opt/local/bin/i386-elf-gcc # change this to path to your i386 gcc
 GDB = /usr/local/bin/i386-elf-gdb # change this to path to your i386 gdb
-CFLAGS = -g -m32 -ffreestanding -fno-PIC -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
+CFLAGS = -g -m32 -ffreestanding -fno-PIC -fno-stack-protector -nostartfiles -nodefaultlibs
 
 # run by default
 # appends 2880 blocks of 0s, each block is 512 bytes in size (standard floppy disk size)
@@ -23,7 +23,7 @@ kernel.elf: boot/kernel-entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^
 
 run: sora.img
-	qemu-system-i386 -fda $< -audiodev coreaudio,id=default -machine pcspk-audiodev=default
+	qemu-system-i386 -fda $< -audiodev coreaudio,id=default -machine pcspk-audiodev=default -d int -no-shutdown -no-reboot
 
 # open connection to qemu on port 1234
 # load kernel object with symbols
