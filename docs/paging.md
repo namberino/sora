@@ -101,8 +101,18 @@ Page alignment is also helpful when protecting different parts of memory from be
 
 # Frame allocation
 
+> Note: Frames are the physical locations that the pages map to 
+
 To map a page to a frame, we need some way of finding a free frame. 
 
 We could just maintain a massive array of 1's and 0's, but that would be extremely wasteful as we don't need 32-bits just to hold 2 values, we can do that with 1 bit. So by using a [bit array](https://en.wikipedia.org/wiki/Bit_array), we will be using 32 times less space
 
 The bit array will have 3 functions: set, test, clear
+
+# The CR3 register
+
+This register is used when virtual addressing (paging) is enabled and contains the physical address of the page directory
+
+CR3 enables the processor to translate linear addresses into physical addresses by locating the page directory and page tables for the current task
+
+The upper 20 bits of CR3 become the page directory base register (PDBR), which stores the physical address of the first page directory

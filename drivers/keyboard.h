@@ -1,6 +1,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
+#include "../cpu/registers.h"
 #include "../cpu/ports.h"
 #include "../cpu/isr.h"
 #include "screen.h"

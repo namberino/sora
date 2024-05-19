@@ -3,6 +3,7 @@
 
 #include "../cpu/isr.h"
 #include "../cpu/timer.h"
+#include "../cpu/paging.h"
 #include "../drivers/screen_colors.h"
 #include "../drivers/screen.h"
 #include "../drivers/speaker.h"

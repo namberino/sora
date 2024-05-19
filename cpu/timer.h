@@ -1,6 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include "registers.h"
 #include "isr.h"
 #include "ports.h"
 #include "../libc/function.h"
