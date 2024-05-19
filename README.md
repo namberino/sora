@@ -50,6 +50,7 @@ sora
 │  ├─ paging.h
 │  ├─ ports.c
 │  ├─ ports.h
+│  ├─ registers.h
 │  ├─ timer.c
 │  ├─ timer.h
 │  └─ type.h
