@@ -10,6 +10,8 @@ int main(int argc, char* argv[])
 
 When I `objdump` this program, the program starts at address `0x80482a0`, which is around 128MB into address space. Even though this program runs perfectly in a machine with < 128MB of RAM.
 
+Paging allows a process to access more virtual memory than the physical RAM. If the RAM is full, the CPU could swap the pages that have not been used recently to disk and free up memory for other pages that needs it.
+
 The program is reading and writing to a virtual address space. Some parts of the virtual address space maps to the physical memory, some parts don't
 
 Trying to access the unmapped part will result in the processor raising a *page fault* error, the OS catches it, and (in POSIX systems) delivers a SIGSEGV signal closely followed by SIGKILL
@@ -96,3 +98,11 @@ As we're allocating quite early on in the kernel bootup, we can make the assumpt
 If you have memory that is paged (swapped in and out of disk) or cached then arranging blocks such as structures or arrays so that they don't cross a boundary speeds up processing because it ensures the memory doesn't need to be swapped or cache lines filled when the code accesses different parts of the block.
 
 Page alignment is also helpful when protecting different parts of memory from being accessed by non-privileged processes as the protection hardware only has a limited number of registers so whole pages are protected rather than individual bytes or words.
+
+# Frame allocation
+
+To map a page to a frame, we need some way of finding a free frame. 
+
+We could just maintain a massive array of 1's and 0's, but that would be extremely wasteful as we don't need 32-bits just to hold 2 values, we can do that with 1 bit. So by using a [bit array](https://en.wikipedia.org/wiki/Bit_array), we will be using 32 times less space
+
+The bit array will have 3 functions: set, test, clear

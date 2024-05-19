@@ -45,6 +45,6 @@ void switch_page_directory(page_directory_t* new_page_dir); // loads the specifi
 // if make == 1, create the page table that contains this page if it is not created yet
 page_t* get_page(uint32_t address, int make, page_directory_t* directory);
 
-void page_fault_handler(register_t regs);
+void page_fault_handler(registers_t regs);
 
 #endif
