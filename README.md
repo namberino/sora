@@ -98,7 +98,6 @@ sora
 - [x] Interrupt Descriptor Table
 - [x] Parse user input
 - [x] Memory allocator
-- [x] Frame allocation
 
 # Documentation
 
