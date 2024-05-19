@@ -46,6 +46,8 @@ sora
 │  ├─ int.asm
 │  ├─ isr.c
 │  ├─ isr.h
+│  ├─ paging.c
+│  ├─ paging.h
 │  ├─ ports.c
 │  ├─ ports.h
 │  ├─ timer.c
