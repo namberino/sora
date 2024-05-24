@@ -108,6 +108,7 @@ You can find all the documentations in this [directory](docs). I've also added d
 
 # References
 
+- [Bootsector mini projects](https://github.com/namberino/bootsector-projects)
 - [OSDev Wiki](https://wiki.osdev.org/Main_Page) (Main resource)
 - [University of Birmingham's os-dev.pdf](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)
 - [The little book about OS development](https://littleosbook.github.io/)
