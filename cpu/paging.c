@@ -176,7 +176,7 @@ void page_fault_handler(registers_t* reg)
     kprint_color("\nAt address 0x", ERROR_COLOR_1);
     kprint_color(faulting_address_ascii, ERROR_COLOR_1);
     kprint("\n");
-    // halt();
+    halt();
 }
 
 /*
