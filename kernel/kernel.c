@@ -10,7 +10,7 @@ void kernel_main()
     // asm volatile("int $2");
     // asm volatile("int $3");
 
-    kprint_color("Hello World! I am Sora OS.\n", OUTPUT_COLOR);
+    kprint_color("Hello World! I am Sora.\n", OUTPUT_COLOR);
     kprint_color("Type HELP for the list of available commands\n\n", OUTPUT_COLOR);
     kprint_cmd_prompt();
 }
